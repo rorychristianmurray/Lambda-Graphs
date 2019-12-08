@@ -13,7 +13,7 @@ class Graph:
         """
         Add a vertex to the graph.
         """
-        self.vertices[vertex] = set()
+        self.vertices[vertex_id] = set()
 
 
     def add_edge(self, v1, v2):
@@ -38,7 +38,25 @@ class Graph:
         Print each vertex in breadth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
+        ## Create an empty queue and enqueue starting vertex ID
+        ## Create empty Set to store visited vertices
+        ## While queue not empty
+        ## Dequeue first vertex
+        ## If not visited mark as visited
+        ## add its neighbors to back of queue
+
+        q =  []        
+        visited = {1, 2, 3, 4, 5, 7, 6}
+        1
+        2
+        3
+        4
+        5
+        7
+        6
+
+
+
 
     def dft(self, starting_vertex):
         """
@@ -124,7 +142,7 @@ if __name__ == '__main__':
         1, 2, 4, 3, 7, 6, 5
         1, 2, 4, 3, 7, 5, 6
     '''
-    graph.bft(1)
+    # graph.bft(1)
 
     '''
     Valid DFT paths:
@@ -133,19 +151,19 @@ if __name__ == '__main__':
         1, 2, 4, 7, 6, 3, 5
         1, 2, 4, 6, 3, 5, 7
     '''
-    graph.dft(1)
-    graph.dft_recursive(1)
+    # graph.dft(1)
+    # graph.dft_recursive(1)
 
     '''
     Valid BFS path:
         [1, 2, 4, 6]
     '''
-    print(graph.bfs(1, 6))
+    # print(graph.bfs(1, 6))
 
     '''
     Valid DFS paths:
         [1, 2, 4, 6]
         [1, 2, 4, 7, 6]
     '''
-    print(graph.dfs(1, 6))
-    print(graph.dfs_recursive(1, 6))
+    # print(graph.dfs(1, 6))
+    # print(graph.dfs_recursive(1, 6))
