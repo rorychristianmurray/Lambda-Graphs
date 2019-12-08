@@ -40,6 +40,7 @@ class Graph:
         """
         ## Create an empty queue and enqueue starting vertex ID
         q =  Queue()
+        q.enqueue(starting_vertex)
 
         ## Create empty Set to store visited vertices
         visited = set()
@@ -64,6 +65,7 @@ class Graph:
         """
         ## Create an empty stack and enqueue starting vertex ID
         s =  Stack()
+        s.push(starting_vertex)
 
         ## Create empty Set to store visited vertices
         visited = set()
@@ -96,7 +98,25 @@ class Graph:
         starting_vertex to destination_vertex in
         breath-first order.
         """
-        pass  # TODO
+
+        ## Create an empty queue and enqueue
+        ## A PATH TO the starting verted id
+
+        ## Create a Set to store visited vertices
+
+        ## while queue is not empty
+            ## dequeue the first PATH
+            ## grab the last vertex from the PATH
+            # if that vertex has not been visited
+                ## check if its the target
+                    ## if so return path
+                ## mark as visited
+                ## then add A PATH TO its neighbors 
+                ## to the back of the queue
+                    ## copy the paath
+                    ## append neighbor to the back
+
+        
 
     def dfs(self, starting_vertex, destination_vertex):
         """
@@ -158,7 +178,7 @@ if __name__ == '__main__':
         1, 2, 4, 3, 7, 6, 5
         1, 2, 4, 3, 7, 5, 6
     '''
-    # graph.bft(1)
+    graph.bft(1)
 
     '''
     Valid DFT paths:
@@ -167,7 +187,7 @@ if __name__ == '__main__':
         1, 2, 4, 7, 6, 3, 5
         1, 2, 4, 6, 3, 5, 7
     '''
-    # graph.dft(1)
+    graph.dft(1)
     # graph.dft_recursive(1)
 
     '''
