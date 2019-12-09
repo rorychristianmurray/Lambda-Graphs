@@ -165,8 +165,7 @@ class Graph:
         ## Create an empty stack and push
         ## A PATH TO the starting vertex
         s = Stack()
-        path = [starting_vertex]
-        s.push(path)
+        s.push([starting_vertex])
 
         ## Create a Set to store visited vertices
         visited = set()
@@ -174,28 +173,25 @@ class Graph:
         ## while stack is not empty
         while s.size() > 0:
             ## dequeue the first PATH
-            p = s.pop()
+            path = s.pop()
             ## grab the last vertex from the PATH
-            v = p[-1]
+            v = path[-1]
             # if that vertex has not been visited
             if v not in visited:
                 ## check if it is the target
                 if v is destination_vertex:
                     ## if so return path
-                    print(p)
-                    return p
+                    return path
                 ## mark as visited
                 visited.add(v)
 
                 ## then add A PATH TO its neighbors 
                 ## to the back of the queue
-                for neighbor in self.vertices[v]:
-                    print(f"dfs neighbor : {neighbor}")
+                for next_vert in self.vertices[v]:
                     ## copy the path
-                    new_path = path
+                    new_path = list(path)
                     ## append neighbor to the back
-                    new_path.append(neighbor)
-                    print(f"new_path : {new_path}")
+                    new_path.append(next_vert)
                     s.push(new_path)
 
     def dfs_recursive(self, starting_vertex, destination_vertex):
@@ -295,8 +291,10 @@ if __name__ == '__main__':
         [1, 2, 4, 6]
         [1, 2, 4, 7, 6]
     '''
-    # print(graph.dfs(1, 6))
+    print("\nstarting depth first search\n")
+    print(graph.dfs(1, 6))
     # print(graph.dfs_recursive(1, 6))
+    print("\nending depth first search\n")
 
 
 # print(f"\ngraph.get_neighbors(7) : {graph.get_neighbors(7)}\n")
