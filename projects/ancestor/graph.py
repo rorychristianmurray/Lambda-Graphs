@@ -9,7 +9,6 @@ class Graph:
     def __init__(self):
         self.vertices = {}
         self.visited = set()
-        self.path = []
 
     def add_vertex(self, vertex_id):
         """

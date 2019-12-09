@@ -5,15 +5,30 @@ def earliest_ancestor(ancestors, starting_node):
     ## instantiate graph
     g = Graph()
 
-    ## build the graph
+    # create set of keys
+    # for i in ancestors:
+    #     print(f"i[0] : {i[0]}")
+    #     g.add_vertex(i[0])
+    
+    # build the graph
     for i in ancestors:
         ## for each tuple in the list
         ## add both as vertices and connect
         g.add_vertex(i[0])
+        # g.add_vertex(i[1])
+        # g.add_edge(i[0], i[1])
+    
+    for i in ancestors:
+        ## for each tuple in the list
+        ## add both as vertices and connect
         g.add_vertex(i[1])
+    
+    for i in ancestors:
+        ## for each tuple in the list
+        ## add both as vertices and connect
         g.add_edge(i[0], i[1])
     
-    print(f"ancestors : {ancestors}")
+    print(f"g.vertices : {g.vertices}")
 
     ## traverse the graph
     ## as traverse track path
