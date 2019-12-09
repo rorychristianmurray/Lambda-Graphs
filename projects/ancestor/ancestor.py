@@ -1,4 +1,5 @@
 from graph import Graph
+from util import Stack, Queue
 
 
 def earliest_ancestor(ancestors, starting_node):
@@ -35,6 +36,31 @@ def earliest_ancestor(ancestors, starting_node):
     ## get length of paths
     ## return root of longest path
     ## if satisfy reqs
+
+    q = Queue()
+    visited = set()
+    p1 = [starting_node]
+    q.enqueue(p1)
+
+    ## keep track of all paths
+    all_paths = [p1]
+
+    while q.size() > 0:
+        path = q.dequeue()
+        vertex = path[-1] # last node visited in path
+        if vertex not in visited:
+            ## add to path
+            visited.add(vertex)
+        
+        for next_vertex in g.vertices[vertex]:
+            ## create new paths
+            new_path = list(path)
+            new_path.append(next_vertex)
+            all_paths.append(new_path)
+            q.enqueue(new_path)
+
+
+    print(f"all_paths : {all_paths}")
     return None
 
 test_ancestors = [(1, 3), (2, 3), (3, 6), (5, 6), (5, 7), (4, 5), (4, 8), (8, 9), (11, 8), (10, 1)]
