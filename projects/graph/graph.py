@@ -85,8 +85,7 @@ class Graph:
                 ## add its neighbors to back of queue
                 for neighbor in self.vertices[v]:
                     s.push(neighbor)
-        pass  # TODO
-
+    
     def dft_recursive(self, starting_vertex):
         """
         Print each vertex in depth-first order
@@ -94,9 +93,14 @@ class Graph:
 
         This should be done using recursion.
         """
-        pass  # TODO
+        v = starting_vertex
+        if v not in self.visited:
+            self.visited.add(v)
+            print(f"recursive call v : {v}")
+            for neighbor in self.vertices:
+                self.dft_recursive(neighbor)
 
-    def bfs(self, starting_vertex, destination_vertex):
+    def bfs(self, starting_vertex_path, destination_vertex):
         """
         Return a list containing the shortest path from
         starting_vertex to destination_vertex in
@@ -104,21 +108,35 @@ class Graph:
         """
 
         ## Create an empty queue and enqueue
-        ## A PATH TO the starting verted id
+        ## A PATH TO the starting vertex
+        q = Queue()
+        q.enqueue(starting_vertex_path)
 
         ## Create a Set to store visited vertices
+        visited = set()
 
         ## while queue is not empty
+        while q.size() > 0:
             ## dequeue the first PATH
+            p = q.dequeue()
             ## grab the last vertex from the PATH
+            v = p[len(p) - 1]
             # if that vertex has not been visited
+            if v not in visited:
                 ## check if its the target
+                if v is destination_vertex:
                     ## if so return path
+                    print(p)
                 ## mark as visited
+                if v not in visited:
+                    visited.add(v)
                 ## then add A PATH TO its neighbors 
                 ## to the back of the queue
-                    ## copy the paath
+                    for neighbor in self.vertices[v]:
+                        q.enqueue(neighbor)
+                    ## copy the path
                     ## append neighbor to the back
+   
 
         
 
