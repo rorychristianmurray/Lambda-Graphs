@@ -83,13 +83,13 @@ def find_word_ladder(beginWord, endWord):
     while qq.size() > 0:
         path = qq.dequeue()
         vertex = path[-1] # vertex is our word
-        if vertex is not in visited:
+        if vertex not in visited:
             # here's where we accomplish 
             # biz logic
-            if vertex === endWord:
+            if vertex == endWord:
                 return path
-            visited.add(vertext)
+            visited.add(vertex)
             for new_vert in get_neighbors(vertex):
                 new_path = list(path)
                 new_path.append(new_vert)
-                qq.enqueue()
+                qq.enqueue(new_path)
