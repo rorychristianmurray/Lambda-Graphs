@@ -31,7 +31,11 @@ class Graph:
         """
         Get all neighbors (edges) of a vertex.
         """
-        pass  # TODO
+        if vertex_id in self.vertices:
+            return self.vertices[vertex_id]
+        else: 
+            raise IndexError("That vertex does not exist")
+    
 
     def bft(self, starting_vertex):
         """
@@ -203,3 +207,6 @@ if __name__ == '__main__':
     '''
     # print(graph.dfs(1, 6))
     # print(graph.dfs_recursive(1, 6))
+
+
+print(f"\ngraph.get_neighbors(7) : {graph.get_neighbors(7)}\n")
