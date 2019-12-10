@@ -22,11 +22,9 @@ def earliest_ancestor(ancestors, starting_node):
     for i in ancestors:
         ## for each tuple in the list
         ## add both as vertices and connect
-        ## while inverting the tree
-
         g.add_edge(i[1], i[0])
     
-    # print(f"g.vertices : {g.vertices}")
+    print(f"g.vertices : {g.vertices}")
 
     ## traverse the graph
     ## as traverse track path
@@ -67,10 +65,10 @@ def earliest_ancestor(ancestors, starting_node):
             longest_path = len(path)
             parent_of_longest_path = path[-1]
     
-    # print(f"longest_path : {longest_path}")
-    # print(f"parent_of_longest_path : {parent_of_longest_path}")
+    print(f"longest_path : {longest_path}")
+    print(f"parent_of_longest_path : {parent_of_longest_path}")
 
-    # print(f"all_paths : {all_paths}")
+    print(f"all_paths : {all_paths}")
 
     if parent_of_longest_path is starting_node:
         parent_of_longest_path = -1
