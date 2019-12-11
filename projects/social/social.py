@@ -1,14 +1,17 @@
-
+import random
 
 class User:
     def __init__(self, name):
         self.name = name
+    def __repr__(self):
+        return self.name
 
 class SocialGraph:
     def __init__(self):
         self.last_id = 0
         self.users = {}
         self.friendships = {}
+
 
     def add_friendship(self, user_id, friend_id):
         """
@@ -46,9 +49,43 @@ class SocialGraph:
         self.friendships = {}
         # !!!! IMPLEMENT ME
 
-        # Add users
+        # avg_friendships = total_friendships/num_users
 
-        # Create friendships
+
+        # Add users
+        # call addUser() until number of users is num_users
+
+        # Create random friendships
+        # total_friendships = avg_friendships * num_users
+        for i in range(numUsers):
+            self.add_user(f"User {i+1}")
+
+        # create random friendships
+        # generate list of all possible friendships
+        possibleFriendships = []
+        # avoid dupes by ensuring first id 
+        # is smaller than second
+        for userID in self.users:
+            for friendID in range(userID + 1, self.last_id + 1):
+                possibleFriendships.append((userID, friendID))
+        
+        print(f"\npossibleFriendships : {possibleFriendships}\n")
+
+        # shuffle list
+        random.shuffle(possibleFriendships)
+        print(f"\nrandom friendships : {possibleFriendships}\n")
+
+
+        # slice off total_friendships from front to create friendships
+        totalFriendships = avgFriendships * numUsers // 2
+        print(f"\nfriendships to create : {totalFriendships}\n")
+        for i in range(totalFriendships):
+            friendship = possibleFriendships[i]
+            self.add_friendship(friendship[0], friendship[1])
+
+
+      
+
 
     def get_all_social_paths(self, user_id):
         """
@@ -66,7 +103,11 @@ class SocialGraph:
 
 if __name__ == '__main__':
     sg = SocialGraph()
-    sg.populate_graph(10, 2)
+    sg.populate_graph(11, 3)
+    print("\nUSERS: ")
+    print(sg.users)
+    print("\nFRIENDSHIPS: ")
     print(sg.friendships)
+    print("\n")
     connections = sg.get_all_social_paths(1)
     print(connections)
