@@ -142,7 +142,9 @@ class SocialGraph:
 
 if __name__ == '__main__':
     sg = SocialGraph()
-    sg.populate_graph(1000, 5)
+    pop_total = 100
+    friend_connects = 5
+    sg.populate_graph(pop_total, friend_connects)
     # print("\nUSERS: ")
     # print(sg.users)
     print("\nFRIENDSHIPS: ")
@@ -154,3 +156,25 @@ if __name__ == '__main__':
     connections = sg.get_all_social_paths(1)
     print(f"\n{connections}\n")
     print("\n")
+
+    total_degrees = 0
+
+    for k, v in connections:
+        ## add total length of paths (degress sep)
+        # total_degrees += len(connections[path])
+        # print(len(connections[path]))
+        print(len(v))
+        
+
+    ## divide total degress by total connects
+
+    avg_degrees = total_degrees / len(connections)
+
+    percent_connected = len(connections) / pop_total
+
+    print(f"avg_degrees : {avg_degrees}")
+
+    print(f"percent_connected : {percent_connected}")
+
+
+
