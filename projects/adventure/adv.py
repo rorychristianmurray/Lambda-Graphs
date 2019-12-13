@@ -142,8 +142,8 @@ while unexplored is True: # while curr room has unexplored paths
         elif last_dir == 'w':
             swap_dir = 'e'
         dirs[swap_dir] = prev_room
-        print("check dirs[swap_dir]")
-        print(f"\n{dirs[swap_dir]}\n")
+        # print("check dirs[swap_dir]")
+        # print(f"\n{dirs[swap_dir]}\n")
 
     print(f"visited : {visited}")
     print(f"down in the bayou")
@@ -174,11 +174,17 @@ while unexplored is True: # while curr room has unexplored paths
 
         otherwise break
         """
-        def bfs(starting_vertex, destination_vertext):
+        
+        def bfs(starting_room):
             """
             Return a list containing shortest path from starting_vertex
             to destination_vertex
             """
+
+            ## gotta tell the player to move
+            ## somewhere and check against that
+
+            print("in bfs")
 
             ## create an empty queue and enqueue
             ## a path to the starting vertex
@@ -187,23 +193,57 @@ while unexplored is True: # while curr room has unexplored paths
             ## create a something something
             ## to store the visited rooms. 
             ## what about path/dirs there?
+            bfs_visited = set()
 
-            q.enqueue([starting_vertex])
+            q.enqueue([starting_room])
 
             ## while queue is not empty
+            ## while player is not at a node
+            # where directions dont have a '?'
+
+            ## you gonna wanna keep moving
+
+            ## once you
+
             while q.size() > 0:
                 ## dequeue the first path
                 path = q.dequeue()
-                ## get last vertext from path
+                ## get last room from path
                 last_room = path[-1]
+                curr_room = player.currentRoom.id
+                print(f"curr_room : {curr_room}")
+                directions = player.currentRoom.getExits()
+                print(f"bfs directions : {visited[curr_room]}")
+                # print(f"bfs visited : {visited}")
+                break
                 ## if last_room has not been visited
                 if last_room not in visited:
                     ## check if it is the target
                     ## if the room.getDirections have a '?'
-                    return path
+                    bfs_unexplored = False
+                    for dir in directions:
+                        if dir == '?':
+                            bfs_unexplored = True
+                    
+                    if bfs_unexplored == True:
+                        ## move to this path
+                        ## then reset unexplored
+                        for room in path: # convert this\
+                            print(f"room : {room} in path : {path}")
+                            # player.travel(*room*)
+                        return path
                 ## mark as visited
                 bfs_visited.add(last_room)
 
+                for next_room in directions:
+                    # create new paths
+                    new_path = list(path)
+                    new_path.append(next_room)
+                    q.enqueue(new_path)
+                    # move player
+
+        pass_bfs_room = player.currentRoom.id
+        bfs(pass_bfs_room)
         print("breaking")
         break
 
@@ -218,7 +258,7 @@ while unexplored is True: # while curr room has unexplored paths
     dir_array = []
     for dir in possible_directions:
         dir_array.append(dir)
-    card_dir = dir_array[choose_dir]
+    card_dir = dir_array[choose_dir - 1]
 
 
 
