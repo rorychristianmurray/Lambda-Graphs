@@ -69,7 +69,7 @@ class SocialGraph:
             for friendID in range(userID + 1, self.last_id + 1):
                 possibleFriendships.append((userID, friendID))
         
-        # print(f"\npossibleFriendships : {possibleFriendships}\n")
+        print(f"\npossibleFriendships : {possibleFriendships}\n")
 
         # shuffle list
         random.shuffle(possibleFriendships)
@@ -142,8 +142,8 @@ class SocialGraph:
 
 if __name__ == '__main__':
     sg = SocialGraph()
-    pop_total = 100
-    friend_connects = 5
+    pop_total = 10
+    friend_connects = 2
     sg.populate_graph(pop_total, friend_connects)
     # print("\nUSERS: ")
     # print(sg.users)
@@ -165,7 +165,6 @@ if __name__ == '__main__':
         # print(len(connections[path]))
         print(len(v))
         
-
     ## divide total degress by total connects
 
     avg_degrees = total_degrees / len(connections)

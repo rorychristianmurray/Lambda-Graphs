@@ -23,43 +23,221 @@ world.printRooms()
 player = Player("Name", world.startingRoom)
 
 # Fill this out
-traversalPath = []
+traversalPath = [None]
 
-# get first room
-genesis_room = player.currentRoom.id
-genesis_dirs = player.currentRoom.getExits()
 visited = {}
 dirs_dict = {}
+q = Queue()
+s = Stack()
+prev_room = '?'
 
 
-print(f"visited : {visited}")
-print(f"genesis_room : {genesis_room}")
-print(f"genesis_dirs : {genesis_dirs}")
+## get current room
+## get current possible directions
+    ## and see if you have info
+    ## on those traveled dirs
+    ## connect room we were in to room
+    ## we are in now
+        ## (initialize empty)
+## see if you have been in current room before
+    ## if you have not been in it
+        ## add an initial entry to a visited 
+        ## dict with the room id as key
+        ## and directions with '?'
+        ## as value
+    ## if you have been in it
+    ## we don't need to check
 
-for i in genesis_dirs:
-    dirs_dict[i] = '?'
-
-visited[genesis_room] = dirs_dict
-
-print(f"visited : {visited}")
-
-## bfs for shortest path to unvisited room
-
-## create empty queue
-q = Queue() # we want to queue up exploring all those directions
-
-# create a dict to explore visited rooms
-rooms_visited = {}
-
-# add genesis room and directions to queue
-starting_room = visited[0]
-
-q.enqueue([visited[0]])
-
-print(f"visited[0] : {visited[0]}")
+## count how many possible unexplored dirs
+## if > 0 then choose one randomly
+    ## add chosen dir to path traversal path
+    ## move to new room
 
 
+## if zero then we short out
+## maybe it should be a while loop
 
+## when it hits zero we want to search for the closest node 
+## (unconnected) that has a '?' in its dirs
+
+## edge cases : nothing in traversalPath
+
+
+## declare while loop
+
+## while visited[room][dir] has '?'
+
+unexplored = True
+
+
+while unexplored is True: # while curr room has unexplored paths
+    unexplored = False
+    print("swap unexplored to False")
+    ## get current room
+    room = player.currentRoom.id
+
+    ## get current possible directions
+    # check if room in visited
+    if room not in visited:
+        print(f"room {room} not in visited")
+        # get fresh dirs
+        dirs = player.currentRoom.getExits()
+        dirs_dict = {}
+        # print(f"dirs {dirs}")
+        for dir in dirs:
+            dirs_dict[dir] = '?'
+        ## connect room prev room
+        if not traversalPath[-1]:
+            last_dir = '?'
+        else:
+            last_dir = traversalPath[-1]
+            visited[prev_room][last_dir] = room
+            
+            # flip the direction
+            swap_dir = '?'
+            if last_dir == 'n':
+                swap_dir = 's'
+            elif last_dir == 's':
+                swap_dir = 'n'
+            elif last_dir == 'e':
+                swap_dir = 'w'
+            elif last_dir == 'w':
+                swap_dir = 'e'
+
+            dirs_dict[swap_dir] = prev_room
+        ## add to visited
+        print(f"\ndirs_dict : {dirs_dict}\n")
+        visited[room] = dirs_dict
+        print(f"\nvisited[room] : {visited[room]}\n")
+
+
+    print("\nout of room not in visited\n")
+    print(f"\nvisited : {visited}\n")
+    ## check if unexplored paths exist
+    for dir in visited[room]:
+        if visited[room][dir] == '?':
+                print("swap unexplored to True")
+                unexplored = True
+
+    # get all directions
+    dirs = visited[room]
+    print(f"\ndirs : {dirs}\n")
+
+    ## update the entry with
+    ## new connection
+
+    ## connect room prev room
+    if not traversalPath[-1]:
+        last_dir = '?'
+    else:
+        last_dir = traversalPath[-1]
+        visited[prev_room][last_dir] = room
+        swap_dir = '?'
+        if last_dir == 'n':
+            swap_dir = 's'
+        elif last_dir == 's':
+            swap_dir = 'n'
+        elif last_dir == 'e':
+            swap_dir = 'w'
+        elif last_dir == 'w':
+            swap_dir = 'e'
+        dirs[swap_dir] = prev_room
+        print("check dirs[swap_dir]")
+        print(f"\n{dirs[swap_dir]}\n")
+
+    print(f"visited : {visited}")
+    print(f"down in the bayou")
+
+    # pick random direction
+    possible_directions = visited[room]
+
+    print(f"possible_directions : {possible_directions}")
+
+    # randomly choose one unexplored
+
+    poss_dirs_count = 0
+
+    for dir in possible_directions:
+        if possible_directions[dir] == '?':
+            ## add unexplored directions to the stack
+            poss_dirs_count += 1
+
+    print(f"poss_dirs_count : {poss_dirs_count}")
+
+    ## pick random direction to go in
+
+    if poss_dirs_count == 0:
+        """
+        need to perform a bfs here for a node with a '?' dir
+        and if I can find that going there and setting
+        unexplored to True
+
+        otherwise break
+        """
+        def bfs(starting_vertex, destination_vertext):
+            """
+            Return a list containing shortest path from starting_vertex
+            to destination_vertex
+            """
+
+            ## create an empty queue and enqueue
+            ## a path to the starting vertex
+            q = Queue()
+
+            ## create a something something
+            ## to store the visited rooms. 
+            ## what about path/dirs there?
+
+            q.enqueue([starting_vertex])
+
+            ## while queue is not empty
+            while q.size() > 0:
+                ## dequeue the first path
+                path = q.dequeue()
+                ## get last vertext from path
+                last_room = path[-1]
+                ## if last_room has not been visited
+                if last_room not in visited:
+                    ## check if it is the target
+                    ## if the room.getDirections have a '?'
+                    return path
+                ## mark as visited
+                bfs_visited.add(last_room)
+
+        print("breaking")
+        break
+
+    if poss_dirs_count > 0:
+        choose_dir = random.randint(1, poss_dirs_count)
+
+
+    print(f"choose_dir : {choose_dir}")
+
+    ## convert to cardinal direction
+    ## go the choose_dir'th direction available
+    dir_array = []
+    for dir in possible_directions:
+        dir_array.append(dir)
+    card_dir = dir_array[choose_dir]
+
+
+
+    # go in cardinal direction
+
+    print(f"card_dir : {card_dir}")
+
+    ## set prev_room as room
+    prev_room = room
+    print(f"prev_room : {prev_room}")
+
+    ## add direction of travel to path
+    traversalPath.append(card_dir)
+    print(f"traversalPath {traversalPath}")
+
+    ## travel to room
+    player.travel(card_dir)
+
+print("out")
 
 
 
